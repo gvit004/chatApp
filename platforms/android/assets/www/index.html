@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="ionicApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>ChatApp</title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script src="cordova.js"></script>
+
+    <script type="text/javascript" src="http://cdn.socket.io/socket.io-1.0.3.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body ng-controller="chatController as vm" class="platform-android platform-cordova platform-webview">
+
+
+<form class="chatinput" novalidate>
+    <div class="list">
+        <label class="item item-input item-floating-label">
+            <span class="input-label">Username</span>
+            <input type="text" placeholder="First Name" ng-model="vm.username">
+        </label>
+
+        <div class="item item-input item-floating-label">
+            <span class="input-label">Message</span>
+            <input type="text" placeholder="Message" ng-model="vm.message">
+        </div>
+    </div>
+
+    <button style="width:calc(100% - 20px);margin: 10px;" class="button button-light" ng-click="vm.send(vm.message)">
+        Send
+    </button>
+</form>
+
+<div class="list">
+    <div class="item" ng-repeat="item in vm.chatbox">
+        <h2>{{item.username}}</h2>
+
+        <p ng-repeat="msg in item.message track by $index">{{msg}}</p>
+    </div>
+</div>
+</body>
+</html>
